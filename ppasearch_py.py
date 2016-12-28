@@ -29,6 +29,9 @@ list_of_slightly_cleaned_results = []
 # This is the first page of available PPAs.
 totally_clean_list_of_names = []
 
+# Gotta parse hrefs as well as names!
+gross_looking_hrefs = []
+
 # Get the ppa name so that we can append it to the end of https://launchpad.net/ubuntu/+ppas?name_filter=
 for item in list_of_tds:
 	test = str(item)
@@ -36,6 +39,16 @@ for item in list_of_tds:
 	for item2 in test2:
 		if "</a>" in item2:
 			list_of_slightly_cleaned_results.append(item2)
+		else:
+			gross_looking_hrefs.append(item2)
+
+# Cleaning up hrefs so that we can get a nice string to append to https://launchpad.net/
+for href in gross_looking_hrefs:
+	test = str(href)
+	test2 = test.split('"')
+	for item2 in test2:
+		if "~" in item2:
+			print(item2)
 
 # This will return the name of each PPA!
 for slightly_cleaned_result in list_of_slightly_cleaned_results:
