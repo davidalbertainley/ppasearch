@@ -48,7 +48,53 @@ for href in gross_looking_hrefs:
 	test2 = test.split('"')
 	for item2 in test2:
 		if "~" in item2:
-			print(item2)
+			"""print(item2)"""
+
+# Array for parsing the links if there are multiple page results.
+multiple_pages_array_gross = []
+
+# Andd an array for the actual link.
+multiple_pages_array_clean = []
+
+# Gets an ugly version of the link of the second page.
+for row in soup.findAll('a', attrs={'id': 'lower-batch-nav-batchnav-next'}):
+	row_to_string = str(row)
+	split_string = row_to_string.split('href="')
+	for item in split_string:
+		if "https://" in item:
+			multiple_pages_array_gross.append(item)
+
+# Get the actual link from the gross string.
+for link in multiple_pages_array_gross:
+	link_to_string = str(link)
+	split_string = link_to_string.split('"')
+	for item in split_string:
+		if "https://" in item:
+			multiple_pages_array_clean.append(item)
+
+for link in multiple_pages_array_clean:
+	print(link)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # This will return the name of each PPA!
 for slightly_cleaned_result in list_of_slightly_cleaned_results:
@@ -66,9 +112,10 @@ for ppa_result in totally_clean_list_of_names:
 	ppa_counter += 1
 	ppa_counter_string = str(ppa_counter)
 	if ppa_counter < 10:
-		print(ppa_counter_string + "   " + ppa_result)
+		"""print(ppa_counter_string + "   " + ppa_result)"""
 	elif ppa_counter < 99:
-		print(ppa_counter_string + "  " + ppa_result) 
+		"""print(ppa_counter_string + "  " + ppa_result)"""
+		
 
 
 
@@ -84,4 +131,6 @@ for ppa_result in totally_clean_list_of_names:
 
 
 
-## TO DO! ARGUMENTS! + clean up comments.  Also, how do I find the hrefs of each ppa name?
+## TO DO! ARGUMENTS! Parse out extra pages. Figure out spaces in the search.
+##
+##
